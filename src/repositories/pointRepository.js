@@ -2,12 +2,9 @@ const { Plan, Result, Item, User, Point } = require('../../models');
 
 class PointRepository {
 
-  async createRepository(data, itemIds) {
-    const point = await Point.create(data);
+  async createRepository(data) {
 
-    if (itemIds && itemIds.length > 0) {
-      await point.setItems(itemIds);
-    }
+    const point = await Point.create(data);
 
     return await this.findByIdRepository(point.id);
   }
@@ -17,6 +14,7 @@ class PointRepository {
       order: [['createdAt', 'DESC']],
       include: [
         { model: Item, as: 'items' },
+        { model: Plan, as: 'plans' },
       ]
     });
   }

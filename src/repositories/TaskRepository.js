@@ -22,7 +22,7 @@ class TaskRepository {
             {
               model: Point,
               as: 'points',
-              through: { attributes: [] }, // ✨ 隱藏中間表 (plan_points) 的雜訊
+              through: { attributes: [] },
               include: [
                 {
                   model: Item,

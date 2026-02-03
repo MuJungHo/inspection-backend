@@ -1,5 +1,5 @@
 'use strict';
-const bcrypt = require('bcryptjs'); // 引入加密套件
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

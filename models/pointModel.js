@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
       comment: '識別碼 (QR Code/NFC Tag ID)'
     },
     latitude: {
-      type: DataTypes.DECIMAL(10, 6), // 推薦用 DECIMAL 存座標比較精準
+      type: DataTypes.DECIMAL(10, 6),
       allowNull: true,
       comment: '緯度'
     },

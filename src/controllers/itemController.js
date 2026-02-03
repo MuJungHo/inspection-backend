@@ -3,6 +3,7 @@ const createItemController = (service) => async (req, res, next) => {
     const result = await service.createItemService(req.body);
     res.status(201).json({ success: true, data: result });
   } catch (err) {
+    console.log(err)
     next(err);
   }
 };
@@ -16,4 +17,14 @@ const getItemsController = (service) => async (req, res, next) => {
   }
 };
 
-module.exports = { createItemController, getItemsController };
+const getItemsByPointController = (service) => async (req, res, next) => {
+  try {
+    const { pointId } = req.query;
+    const result = await service.findAllItemByPointId(pointId);
+    res.json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createItemController, getItemsController, getItemsByPointController };

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// Repos
 const PointRepo = require('../repositories/pointRepository');
 const PointService = require('../services/pointService');
 const PointController = require('../controllers/pointController');

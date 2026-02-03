@@ -1,7 +1,6 @@
 const { Sequelize } = require('sequelize');
-require('dotenv').config(); // 載入環境變數
+require('dotenv').config();
 
-// 建立 Sequelize 實例
 const sequelize = new Sequelize(
   process.env.DB_NAME,
   process.env.DB_USER,
@@ -17,10 +16,7 @@ const sequelize = new Sequelize(
       acquire: 30000,
       idle: 10000 
     },
-
-    // logging: console.log, // 開發模式下可以開啟，看到 SQL 語句
     logging: true,
-    
   }
 );
 

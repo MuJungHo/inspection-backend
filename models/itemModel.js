@@ -11,7 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Item.belongsTo(models.Point, {
         foreignKey: 'pointId',
-        as: 'point'
+        as: 'point',
+        allowNull: false
       });
     }
   }
@@ -25,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING(100),
       allowNull: false,
-      unique: true,
+      // unique: true,
       comment: '檢查項目名稱'
     },
     dataType: {
@@ -44,12 +45,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.JSONB,
       defaultValue: []
     },
-    // 數值型檢查的標準值或上限 (選用)
     numerical: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    // 運算符號 (如: '>', '<', '=', 'range')
     operator: {
       type: DataTypes.STRING(10),
       allowNull: true

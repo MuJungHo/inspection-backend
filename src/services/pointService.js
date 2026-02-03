@@ -4,11 +4,7 @@ class PointService {
   }
 
   async createPointService(data) {
-    const { inspectorId, name, itemIds } = data;
-
-    const pointData = { inspectorId, name };
-
-    return await this.repo.createRepository(pointData, itemIds);
+    return await this.repo.createRepository(data);
   }
 
   async getAllPointsService() {

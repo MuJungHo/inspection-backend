@@ -10,5 +10,6 @@ const service = new Service(repo);
 
 router.post('/create', Controller.createItemController(service));
 router.get('/list', Controller.getItemsController(service));
+router.get('/listByPoint', Controller.getItemsByPointController(service));
 
 module.exports = router;

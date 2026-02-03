@@ -1,6 +1,6 @@
 'use strict';
 const { Model } = require('sequelize');
-const bcrypt = require('bcryptjs'); // 記得引入 bcrypt
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -8,8 +8,6 @@ module.exports = (sequelize, DataTypes) => {
      * 定義關聯
      */
     static associate(models) {
-
-      // 2. 一個使用者可以被指派多個「任務」
       User.hasMany(models.Task, {
         foreignKey: 'inspectorId',
         as: 'assignedTasks'
@@ -59,14 +57,12 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     underscored: true,
     hooks: {
-      // 1. 建立帳號前
       beforeCreate: async (user) => {
         if (user.password) {
           const salt = await bcrypt.genSalt(10);
           user.password = await bcrypt.hash(user.password, salt);
         }
       },
-      // 2. 修改資料前 (如果有改密碼才重新加密)
       beforeUpdate: async (user) => {
         if (user.changed('password')) {
           const salt = await bcrypt.genSalt(10);
