@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'inspectorId',
         as: 'inspector'
       });
+      Task.hasMany(models.Record, {
+        foreignKey: 'taskId', 
+        as: 'records'
+      });
     }
   }
 

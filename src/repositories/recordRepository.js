@@ -1,15 +1,21 @@
-const { Plan, Result, Item, User } = require('../../models');
+const { Plan, Record, Item, User } = require('../../models');
 
-class ResultRepository {
+class RecordRepository {
 
-  async bulkCreateReultRepository(rowsToSave) {
-    return await Result.bulkCreate(rowsToSave, {
-      updateOnDuplicate: ['value', 'status', 'comment', 'completedAt', 'updatedAt']
-    })
+  async createRepository(data) {
+
+    const point = await Record.create(data);
+
+    return await this.findByIdRepository(point.id);
   }
 
-  async findAllResultRepository() {
-    return await Result.findAll({
+  async findByIdRepository(id) {
+    return await Record.findByPk(id);
+  }
+
+  async findAllRecordRepository(where = {}) {
+    return await Record.findAll({
+      where,
       order: [['createdAt', 'DESC']],
       include: [
         {
@@ -32,4 +38,4 @@ class ResultRepository {
   }
 }
 
-module.exports = ResultRepository;
+module.exports = RecordRepository;

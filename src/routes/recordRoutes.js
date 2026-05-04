@@ -8,7 +8,7 @@ const Controller = require('../controllers/recordController');
 const repo = new Repo();
 const service = new Service(repo);
 
-router.post('/bulk', Controller.bulkCreateResultController(service));
-router.get('/list', Controller.findAllResultController(service));
+router.post('/create', Controller.createController(service));
+router.get('/list', Controller.findAllRecordController(service));
 
 module.exports = router;

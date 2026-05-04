@@ -10,6 +10,12 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE'
       });
 
+      Point.hasMany(models.Record, {
+        foreignKey: 'pointId',
+        as: 'records',
+        onDelete: 'CASCADE'
+      });
+
       Point.belongsToMany(models.Plan, {
         through: 'plan_points',
         foreignKey: 'pointId',

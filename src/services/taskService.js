@@ -1,4 +1,4 @@
-const dayjs = require('dayjs'); 
+const dayjs = require('dayjs');
 const utc = require('dayjs/plugin/utc');
 const timezone = require('dayjs/plugin/timezone');
 
@@ -17,11 +17,21 @@ class TaskService {
     const endOfDay = dayjs().tz(TIMEZONE).endOf('day').toDate();
 
     const tasks = await this.repo.findTasksByInspectorAndDateRange(
-      userId, 
-      startOfDay, 
+      userId,
+      startOfDay,
       endOfDay
     );
     return tasks;
+  }
+
+  async getTaskDetailService(id) {
+    const task = await this.repo.findByIdRepository(id);
+    if (!task) throw new Error('task not found');
+    return task;
+  }
+
+  async getAllService(where = {}) {
+    return await this.repo.findAllRepository(where);
   }
 }
 

@@ -5,17 +5,19 @@ module.exports = {
     const transaction = await queryInterface.sequelize.transaction();
 
     try {
+      // 1. 新增巡檢計畫
       await queryInterface.bulkInsert('plans', [
         {
           name: '陽光每日巡檢',
           frequency: 'DAILY',
-          start_date: '2026-02-01',
-          end_date: '2026-02-28',
+          start_date: '2026-04-01',
+          end_date: '2026-05-28',
           created_at: new Date(),
           updated_at: new Date()
         }
       ], { transaction });
 
+      // 2. 撈出剛剛新增的計畫 ID
       const plans = await queryInterface.sequelize.query(
         `SELECT id FROM plans WHERE name = '陽光每日巡檢' LIMIT 1;`,
         { 
@@ -26,11 +28,24 @@ module.exports = {
 
       const planId = plans[0]?.id;
 
+      // 3. 將這個計畫綁定到 3 個不同的 Points (點位 1, 2, 3)
       if (planId) {
         await queryInterface.bulkInsert('plan_points', [
           {
             plan_id: planId,
             point_id: 1,
+            created_at: new Date(),
+            updated_at: new Date()
+          },
+          {
+            plan_id: planId,
+            point_id: 2, // 新增第二個點位
+            created_at: new Date(),
+            updated_at: new Date()
+          },
+          {
+            plan_id: planId,
+            point_id: 3, // 新增第三個點位
             created_at: new Date(),
             updated_at: new Date()
           }
@@ -47,6 +62,32 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('plans', null, {});
+    const transaction = await queryInterface.sequelize.transaction();
+    
+    try {
+      // 1. 先找出我們要刪除的計畫 ID
+      const plans = await queryInterface.sequelize.query(
+        `SELECT id FROM plans WHERE name = '陽光每日巡檢' LIMIT 1;`,
+        { 
+          type: queryInterface.sequelize.QueryTypes.SELECT,
+          transaction 
+        }
+      );
+
+      const planId = plans[0]?.id;
+
+      if (planId) {
+        // 2. 先刪除關聯表 (plan_points) 中的紀錄，避免外鍵衝突
+        await queryInterface.bulkDelete('plan_points', { plan_id: planId }, { transaction });
+        
+        // 3. 再刪除計畫 (plans) 本身
+        await queryInterface.bulkDelete('plans', { id: planId }, { transaction });
+      }
+
+      await transaction.commit();
+    } catch (error) {
+      await transaction.rollback();
+      throw error;
+    }
   }
 };

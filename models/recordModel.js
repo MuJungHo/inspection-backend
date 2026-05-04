@@ -7,9 +7,15 @@ module.exports = (sequelize, DataTypes) => {
      * 定義關聯
      */
     static associate(models) {
-      Record.belongsTo(models.Plan, {
-        foreignKey: 'planId',
-        as: 'plan'
+
+      Record.belongsTo(models.Task, {
+        foreignKey: 'taskId',
+        as: 'task'
+      });
+
+      Record.belongsTo(models.Point, {
+        foreignKey: 'pointId',
+        as: 'point'
       });
 
       Record.belongsTo(models.Item, {
@@ -30,15 +36,25 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    planId: {
+    taskId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'plan_id',
+      field: 'task_id',
       references: {
-        model: 'plans',
+        model: 'tasks',
         key: 'id'
       },
-      comment: '所屬巡檢計畫ID'
+      comment: '所屬巡檢任務ID'
+    },
+    pointId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'point_id',
+      references: {
+        model: 'points',
+        key: 'id'
+      },
+      comment: '所屬巡檢點位ID'
     },
     itemId: {
       type: DataTypes.INTEGER,
@@ -90,7 +106,7 @@ module.exports = (sequelize, DataTypes) => {
     indexes: [
       {
         unique: true,
-        fields: ['plan_id', 'item_id']
+        fields: ['task_id', 'point_id', 'item_id']
       }
     ]
   });
