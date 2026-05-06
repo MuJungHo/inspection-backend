@@ -23,19 +23,17 @@ class TaskRepository {
               through: { attributes: [] },
               include: [
                 {
-                  model: Record,
-                  as: 'records',
-                  include: [
-                    {
-                      model: Item,
-                      as: 'item'
-                    }
-                  ]
+                  model: Item,
+                  as: 'items'
                 }
               ]
             }
           ]
-        }
+        },
+        {
+          model: Record,
+          as: 'records'
+        },
       ]
     });
   }

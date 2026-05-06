@@ -14,7 +14,49 @@ module.exports = {
         updated_at: new Date()
       },
       {
+        name: '安全梯/逃生通道暢通',
+        data_type: 'boolean',
+        is_reportable: true,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: '緊急照明燈測試',
+        data_type: 'boolean',
+        is_reportable: true,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: '發電機運轉狀態',
+        data_type: 'boolean',
+        is_reportable: true,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: '公共區域照明',
+        data_type: 'boolean',
+        is_reportable: true,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: '環境清潔與垃圾清理',
+        data_type: 'boolean',
+        is_reportable: true,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
         name: '安全門是否暢通',
+        data_type: 'boolean',
+        is_reportable: true,
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        name: '監視器(CCTV)畫面確認',
         data_type: 'boolean',
         is_reportable: true,
         created_at: new Date(),

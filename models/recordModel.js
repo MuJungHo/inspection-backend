@@ -83,8 +83,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.STRING(20),
-      defaultValue: 'NORMAL',
-      comment: '檢查狀態 (NORMAL/ABNORMAL)'
+      defaultValue: 'DEFAULT',
+      comment: '檢查狀態 (DEFAULT/PASS/FAIL)'
     },
     comment: {
       type: DataTypes.STRING,

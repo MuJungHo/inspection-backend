@@ -10,6 +10,7 @@ const PlanRoutes = require('./routes/planRoutes');
 const RecordRoutes = require('./routes/recordRoutes');
 const PointRoutes = require('./routes/pointRoutes');
 const TaskRoutes = require('./routes/TaskRoutes');
+const DashboardRoutes = require('./routes/dashboardRoutes');
 
 require('dotenv').config();
 
@@ -26,6 +27,7 @@ app.use('/api/plan', PlanRoutes);
 app.use('/api/record', RecordRoutes);
 app.use('/api/point', PointRoutes);
 app.use('/api/task', TaskRoutes);
+app.use('/api/dashboard', DashboardRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

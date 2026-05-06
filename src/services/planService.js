@@ -35,7 +35,6 @@ class PlanService {
     }
 
     const end = dayjs(plan.endDate);
-    console.log(plan)
 
     while (current.isBefore(end) || current.isSame(end)) {
       let shouldCreate = false;
