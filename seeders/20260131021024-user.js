@@ -16,6 +16,22 @@ module.exports = {
         updated_at: new Date()
       },
       {
+        username: 'Demo Inspector A',
+        email: 'inspectora@example.com',
+        password: hashedPassword,
+        role: 'inspector',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
+        username: 'Demo Inspector B',
+        email: 'inspectorb@example.com',
+        password: hashedPassword,
+        role: 'inspector',
+        created_at: new Date(),
+        updated_at: new Date()
+      },
+      {
         username: 'Demo Operator',
         email: 'operator@example.com',
         password: hashedPassword,

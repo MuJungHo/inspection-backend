@@ -2,8 +2,8 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
-    await queryInterface.bulkInsert('items', [
+    const [points] = await queryInterface.sequelize.query('SELECT id FROM points ORDER BY id ASC;');
+    const items = [
       {
         name: '滅火器壓力檢查',
         data_type: 'numeric',
@@ -96,7 +96,17 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date()
       },
-    ]);
+    ]
+    let result = [];
+    for (let p = 0; p < points.length; p++) {
+      for (let i = 0; i < items.length; i++) {
+        result.push({
+          ...items[i],
+          point_id: points[p].id
+        })
+      }
+    }
+    await queryInterface.bulkInsert('items', result);
   },
 
   down: async (queryInterface, Sequelize) => {

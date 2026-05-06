@@ -6,44 +6,26 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      let compeletedTasks = [];
-      let dayTasks = [];
-      let weekTasks = [];
-      for (let i = 0; i < 15; i++) {
-        compeletedTasks.push({
-          plan_id: 1,
-          scheduled_at: dayjs('2026-4-01').add(i + 1, 'day').toDate(),
-          status: 'COMPLETED',
-          inspector_id: 1,
-          created_at: new Date(),
-          updated_at: new Date()
-        })
-      }
-      for (let i = 0; i < 30; i++) {
-        dayTasks.push({
-          plan_id: 1,
-          scheduled_at: dayjs('2026-05-04').add(i + 1, 'day').toDate(),
-          status: 'TODO',
-          inspector_id: 1,
-          created_at: new Date(),
-          updated_at: new Date()
-        })
+      let tasks = [];
+
+      const [users] = await queryInterface.sequelize.query('SELECT id FROM users ORDER BY id ASC;');
+      const [plans] = await queryInterface.sequelize.query('SELECT id FROM plans ORDER BY id ASC;');
+      for (let u = 0; u < users.length; u++) {
+        for (let p = 0; p < plans.length; p++) {
+          for (let i = 0; i < 60; i++) {
+            tasks.push({
+              plan_id: plans[p].id,
+              scheduled_at: dayjs('2026-04-04').add(i + 1, 'day').toDate(),
+              status: i < 30 ? 'COMPLETED' : 'TODO',
+              inspector_id: users[u].id,
+              created_at: new Date(),
+              updated_at: new Date()
+            })
+          }
+        }
       }
 
-      for (let i = 0; i < 4; i++) {
-        weekTasks.push({
-          plan_id: 2,
-          scheduled_at: dayjs('2026-05-04').add((i + 1) * 7, 'day').toDate(),
-          status: 'TODO',
-          inspector_id: 1,
-          created_at: new Date(),
-          updated_at: new Date()
-        })
-      }
-
-      await queryInterface.bulkInsert('tasks', [
-        ...compeletedTasks, ...dayTasks, ...weekTasks
-      ], { transaction });
+      await queryInterface.bulkInsert('tasks', tasks, { transaction });
 
       await transaction.commit();
 

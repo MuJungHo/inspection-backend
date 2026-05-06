@@ -23,6 +23,16 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
+    pointId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'point_id',
+      references: {
+        model: 'points',
+        key: 'id'
+      },
+      comment: '所屬巡檢點位ID'
+    },
     name: {
       type: DataTypes.STRING(100),
       allowNull: false,

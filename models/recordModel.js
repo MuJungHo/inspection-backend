@@ -8,6 +8,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
 
+      Record.belongsTo(models.Plan, {
+        foreignKey: 'planId',
+        as: 'plan'
+      });
+
       Record.belongsTo(models.Task, {
         foreignKey: 'taskId',
         as: 'task'
@@ -35,6 +40,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
+    },
+    planId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      field: 'plan_id',
+      references: {
+        model: 'plans',
+        key: 'id'
+      },
+      comment: '所屬巡檢任務ID'
     },
     taskId: {
       type: DataTypes.INTEGER,
