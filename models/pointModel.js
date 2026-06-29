@@ -32,7 +32,9 @@ module.exports = (sequelize, DataTypes) => {
       comment: '點位名稱 (如: A區冰水主機)'
     },
     code: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       unique: true,
       comment: '識別碼 (QR Code/NFC Tag ID)'
     },

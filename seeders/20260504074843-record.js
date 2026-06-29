@@ -1,4 +1,5 @@
 'use strict';
+const dayjs = require('dayjs');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
       const statuses = ['PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'PASS', 'FAIL', 'DEFAULT'];
 
       const [plans] = await queryInterface.sequelize.query('SELECT id FROM plans');
-      const [tasks] = await queryInterface.sequelize.query('SELECT id, inspector_id FROM tasks');
+      const [tasks] = await queryInterface.sequelize.query('SELECT id, inspector_id, scheduled_at FROM tasks WHERE scheduled_at < CURRENT_DATE');
       const [users] = await queryInterface.sequelize.query('SELECT id FROM users');
 
       for (let t = 0; t < tasks.length; t++) {
@@ -36,15 +37,9 @@ module.exports = {
         }
       }
 
-      // for (let u = 0; t < users.length; u++) {
-
-      // }
-      // for (let i = 0; t < items.length; i++) {
-
-      // }
 
 
-      await queryInterface.bulkInsert('records', records, { transaction });
+      // await queryInterface.bulkInsert('records', records, { transaction });
 
       await transaction.commit();
 

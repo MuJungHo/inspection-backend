@@ -11,5 +11,7 @@ const service = new Service(repo);
 router.post('/create', Controller.createItemController(service));
 router.get('/list', Controller.getItemsController(service));
 router.get('/listByPoint', Controller.getItemsByPointController(service));
+router.delete('/delete/:itemId', Controller.deleteItemController(service));
+router.put('/update/:itemId', Controller.updateItemController(service));
 
 module.exports = router;

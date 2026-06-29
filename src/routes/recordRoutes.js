@@ -10,5 +10,6 @@ const service = new Service(repo);
 
 router.post('/create', Controller.createController(service));
 router.get('/list', Controller.findAllRecordController(service));
+router.post('/bulk', Controller.submitBulkRecords(service));
 
 module.exports = router;

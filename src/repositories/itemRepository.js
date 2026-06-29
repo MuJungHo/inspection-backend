@@ -37,9 +37,13 @@ class ItemRepository {
     });
 
     if (affectedCount > 0) {
-      return await this.findById(id);
+      return await Item.findByPk(id);
     }
     return null;
+  }
+
+  async deleteRepository(id) {
+    return await Item.destroy({ where: { id: id } });
   }
 }
 

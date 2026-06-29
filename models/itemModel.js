@@ -43,13 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(20),
       field: 'data_type',
       allowNull: false,
-      comment: '資料類型 (boolean, numeric, text...)'
-    },
-    isReportable: {
-      type: DataTypes.BOOLEAN,
-      field: 'is_reportable',
-      defaultValue: true,
-      comment: '是否需要回報異常'
+      comment: '資料類型'
     },
     options: {
       type: DataTypes.JSONB,
@@ -60,6 +54,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true
     },
     operator: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    answer: {
+      type: DataTypes.STRING(10),
+      allowNull: true
+    },
+    comment: {
       type: DataTypes.STRING(10),
       allowNull: true
     }

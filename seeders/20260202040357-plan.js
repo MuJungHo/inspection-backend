@@ -50,18 +50,18 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date()
         },
-        {
-          plan_id: 2,
-          point_id: 5,
-          created_at: new Date(),
-          updated_at: new Date()
-        },
-        {
-          plan_id: 2,
-          point_id: 6,
-          created_at: new Date(),
-          updated_at: new Date()
-        }
+        // {
+        //   plan_id: 2,
+        //   point_id: 5,
+        //   created_at: new Date(),
+        //   updated_at: new Date()
+        // },
+        // {
+        //   plan_id: 2,
+        //   point_id: 6,
+        //   created_at: new Date(),
+        //   updated_at: new Date()
+        // }
       ], { transaction });
 
       await transaction.commit();

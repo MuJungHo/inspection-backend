@@ -30,8 +30,8 @@ class TaskService {
     return task;
   }
 
-  async getAllService(where = {}) {
-    return await this.repo.findAllRepository(where);
+  async getAllService(query) {
+    return await this.repo.findAllRepository(query);
   }
 }
 

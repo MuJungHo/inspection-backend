@@ -1,4 +1,5 @@
 'use strict';
+const crypto = require('crypto');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,7 +10,7 @@ module.exports = {
         {
           id: 1,
           name: '陽光發電機室',
-          code: 'GEN-B1-001',
+          code: crypto.randomUUID(),
           latitude: 25.000,
           longitude: 121.000,
           created_at: new Date(),
@@ -18,7 +19,7 @@ module.exports = {
         {
           id: 2,
           name: '陽光一樓大廳',
-          code: 'LOBBY-1F-001',
+          code: crypto.randomUUID(),
           latitude: 25.001,
           longitude: 121.001,
           created_at: new Date(),
@@ -27,7 +28,7 @@ module.exports = {
         {
           id: 3,
           name: '陽光地下停車場',
-          code: 'PARKING-B2-001',
+          code: crypto.randomUUID(),
           latitude: 25.002,
           longitude: 121.002,
           created_at: new Date(),
@@ -36,7 +37,7 @@ module.exports = {
         {
           id: 4,
           name: '瑞光發電機室',
-          code: 'GEN-B1-002',
+          code: crypto.randomUUID(),
           latitude: 25.003,
           longitude: 121.003,
           created_at: new Date(),
@@ -45,7 +46,7 @@ module.exports = {
         {
           id: 5,
           name: '瑞光一樓大廳',
-          code: 'LOBBY-1F-002',
+          code: crypto.randomUUID(),
           latitude: 25.002,
           longitude: 121.002,
           created_at: new Date(),
@@ -54,7 +55,7 @@ module.exports = {
         {
           id: 6,
           name: '瑞光地下停車場',
-          code: 'PARKING-B2-002',
+          code: crypto.randomUUID(),
           latitude: 25.004,
           longitude: 121.004,
           created_at: new Date(),

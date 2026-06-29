@@ -27,4 +27,25 @@ const getItemsByPointController = (service) => async (req, res, next) => {
   }
 };
 
-module.exports = { createItemController, getItemsController, getItemsByPointController };
+const deleteItemController = service => async (req, res, next) => {
+  try {
+    const { itemId } = req.params;
+    const result = await service.deleteItemService(itemId);
+    res.json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const updateItemController = service => async (req, res, next) => {
+  try {
+    const { itemId } = req.params;
+    const data = req.body;
+    const result = await service.updateItemService(itemId, data);
+    res.json({ success: true, data: result });
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = { createItemController, getItemsController, getItemsByPointController, deleteItemController, updateItemController };

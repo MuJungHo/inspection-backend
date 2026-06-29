@@ -11,5 +11,6 @@ const service = new PointService(repo);
 
 router.post('/create', PointController.createPointController(service));
 router.get('/list', PointController.findAllController(service));
+router.get('/:id/qrcode', PointController.generatePointQrCode(service));
 
 module.exports = router;

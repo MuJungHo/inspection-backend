@@ -1,13 +1,11 @@
 class ItemService {
   constructor(repo) {
     this.repo = repo;
-    this.ALLOWED_TYPES = ['boolean', 'numeric', 'text', 'multiple'];
+    this.ALLOWED_TYPES = ['single', 'numeric', 'text', 'multiple'];
   }
 
   async createItemService(data) {
-    const { name, dataType, isRequired, pointId } = data;
-
-    return await this.repo.createRepository({ name, dataType, isRequired, pointId });
+    return await this.repo.createRepository(data);
   }
 
   async findAllItemByPointId(data) {
@@ -16,6 +14,30 @@ class ItemService {
 
   async getAllItemsService() {
     return await this.repo.findAllRepository();
+  }
+
+  async deleteItemService(itemId) {
+    const item = await this.repo.findByIdRepository(itemId);
+    if (!item) {
+      return { success: false, code: 404, message: '找不到該巡檢項目' };
+    }
+
+
+    await this.repo.deleteRepository(itemId);
+    return { success: true, code: 200, message: '項目已成功移除' };
+
+  }
+
+  async updateItemService(itemId, data) {
+    const item = await this.repo.findByIdRepository(itemId);
+    if (!item) {
+      return { success: false, code: 404, message: '找不到該巡檢項目' };
+    }
+
+
+    await this.repo.updateRepository(itemId, data);
+    return { success: true, code: 200, message: '項目已成功更新' };
+
   }
 }
 

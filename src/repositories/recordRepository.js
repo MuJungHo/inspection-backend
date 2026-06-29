@@ -1,4 +1,4 @@
-const { Plan, Record, Item, User } = require('../../models');
+const { Plan, Record, Item, User, Task } = require('../../models');
 
 class RecordRepository {
 
@@ -11,6 +11,24 @@ class RecordRepository {
 
   async findByIdRepository(id) {
     return await Record.findByPk(id);
+  }
+
+  async bulkUpsertRecords(recordsData, transaction) {
+    return await Record.bulkCreate(recordsData, {
+      updateOnDuplicate: ['value', 'status', 'comment', 'completed_at', 'updated_at'],
+      transaction: transaction
+    });
+  }
+
+  async updateTaskStatus(taskId, status, transaction) {
+    const result = await Task.update(
+      { status: status },
+      {
+        where: { id: taskId },
+        transaction: transaction
+      }
+    );
+    return result
   }
 
   async findAllRecordRepository(where = {}) {

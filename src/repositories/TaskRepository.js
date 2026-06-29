@@ -38,9 +38,17 @@ class TaskRepository {
     });
   }
 
-  async findAllRepository(where = {}) {
-    return await Task.findAll({
-      where,
+  async findAllRepository({ startDate, endDate, limit, offset, status }) {
+    return await Task.findAndCountAll({
+      where: {
+        scheduledAt: {
+          [Op.gte]: startDate,
+          [Op.lte]: endDate
+        },
+        status
+      },
+      limit,
+      offset,
       order: [['createdAt', 'DESC']],
       include: [
         {
@@ -102,7 +110,11 @@ class TaskRepository {
               ]
             }
           ]
-        }
+        },
+        {
+          model: Record,
+          as: 'records'
+        },
       ],
       order: [
         ['status', 'DESC'],

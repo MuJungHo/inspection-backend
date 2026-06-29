@@ -5,8 +5,6 @@ const getMyTodayTasks = (service) => async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      date: new Date().toISOString().split('T')[0],
-      count: tasks.length,
       data: tasks
     });
 

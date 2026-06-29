@@ -15,8 +15,8 @@ module.exports = {
           for (let i = 0; i < 60; i++) {
             tasks.push({
               plan_id: plans[p].id,
-              scheduled_at: dayjs('2026-04-04').add(i + 1, 'day').toDate(),
-              status: i < 30 ? 'COMPLETED' : 'TODO',
+              scheduled_at: dayjs('2026-05-04').add(i + 1, 'day').toDate(),
+              status: dayjs('2026-05-04').add(i + 1, 'day').isBefore(dayjs()) ? 'COMPLETED' : 'TODO',
               inspector_id: users[u].id,
               created_at: new Date(),
               updated_at: new Date()
